@@ -1,0 +1,48 @@
+:root {
+    --swiper-navigation-size: 2px;
+}
+
+.swiper {
+    cursor: pointer;
+
+    &-container {
+        width: 100%;
+        height: 300px;
+        margin-top: 20px;
+        opacity: 0;
+    }
+
+    &-scrollbar {
+        opacity: 0;
+    }
+
+    &-slide {
+        text-align: left;
+        font-size: 18px;
+        background-color: #fff;
+        user-select: none;
+
+        .event-content {
+            padding: 20px 0;
+        }
+    }
+
+    &-button-prev,
+    &-button-next {
+        max-width: 20px;
+        max-height: 20px;
+        min-width: 20px;
+        min-height: 20px;
+        background-color: white;
+        box-sizing: border-box;
+        border-radius: 50%;
+        border: 2px solid black;
+        color: red;
+        transition: opacity .3s;
+
+        &.swiper-button-disabled {
+            opacity: 0;
+        }
+    }
+
+}
