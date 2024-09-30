@@ -1,7 +1,114 @@
+.time-period-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 96px;
+    box-sizing: border-box;
+    position: relative;
+
+    &::after {
+        position: absolute;
+        content: "";
+        top: 50%;
+        width: 300%;
+        height: 1px;
+        background-color: var(--color-border);
+        z-index: -1;
+    }
+
+    &::before {
+        position: absolute;
+        content: "";
+        left: 50%;
+        height: 300%;
+        width: 1px;
+        background-color: var(--color-border);
+        z-index: -1;
+    }
+}
+
+.time-period-h1 {
+    font-size: 56px;
+    font-weight: bold;
+    line-height: 120%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    max-width: 200px;
+
+    &::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: -80px;
+        height: 100%;
+        width: 5px;
+        background-image: linear-gradient(180deg, var(--color-purple), var(--color-pink));
+    }
+}
+
+
+.time-period-years {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 120px;
+}
+
+.time-period-yearStart,
+.time-period-yearEnd {
+    font-size: 200px;
+    font-weight: bold;
+    line-height: 160%;
+    letter-spacing: -0.02em;
+}
+
+.time-period-yearStart {
+    color: var(--color-purple);
+    text-align: right;
+}
+
+.time-period-yearEnd {
+    color: var(--color-pink);
+    text-align: left;
+}
+
+.time-period-buttons {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.time-period-buttonsInfo {
+    width: 100%;
+}
+
+.time-period-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none;
+
+    &[disabled] {
+        opacity: 0.5;
+    }
+}
+
 .time-period-selector {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 530px;
+    height: 530px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -13,40 +120,58 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 240px;
-        height: 240px;
-        border: 1px solid black;
+        width: 530px;
+        height: 530px;
+        border: 1px solid var(--color-border);
         border-radius: 50%;
     }
 }
 
 .time-period {
     position: absolute;
+    background-color: var(--color-text);
     width: 5px;
     height: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    background-color: #f0f0f0;
     transition: transform 0.3s ease-in-out;
     overflow: hidden;
     transition: all 0.3s;
-    border: 1px solid #f0f0f0;
+    border: 1px solid var(--color-text);
     cursor: pointer;
+    font-size: 20px;
 
-    &:hover {
-        width: 30px;
-        height: 30px;
+    &::after {
+        position: absolute;
+        content: "";
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: var(--color-text);
     }
 
+    &:hover,
     &.active {
-        color: blue;
-        width: 30px;
-        height: 30px;
+        width: 56px;
+        height: 56px;
+        background-color: var(--color-bg);
+
+        &::after {
+            background-color: inherit;
+            z-index: -1;
+        }
     }
 
 }
+
+.time-period-name {
+    font-weight: bold;
+    font-size: 20px;
+}
+
 
 .time-name {
     display: none;

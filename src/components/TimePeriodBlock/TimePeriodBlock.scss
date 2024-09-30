@@ -1,4 +1,9 @@
 .time-period-block {
-    max-width: 800px;
-    margin: 40px auto;
+    max-width: 1440px;
+    margin: 0 160px 0 320px;
+    padding: 170px 80px 140px 80px;
+    box-sizing: border-box;
+    border-left: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
+    overflow: hidden;
 }
