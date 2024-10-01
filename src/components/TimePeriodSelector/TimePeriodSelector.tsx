@@ -17,7 +17,58 @@ const TimePeriodSelector: React.FC<TimePeriodSelectorProps> = ({
 }) => {
   const [activePeriod, setActivePeriod] = useState<TimePeriod | null>(null);
   const [activePeriodIndex, setActivePeriodIndex] = useState<number>(0);
+  const [years, setYears] = useState<{
+    yearStart: number | 0;
+    yearEnd: number | 0;
+  }>({
+    yearStart: 0,
+    yearEnd: 0,
+  });
   const radius = 265;
+
+  useEffect(() => {
+    if (activePeriod) {
+      setYears({
+        yearStart: activePeriod.yearStart,
+        yearEnd: activePeriod.yearEnd,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (activePeriod) {
+      const intervalIdRef = setInterval(() => {
+        if (years.yearStart === 0) {
+          setYears({
+            yearStart: activePeriod.yearStart,
+            yearEnd: activePeriod.yearEnd,
+          });
+        }
+        setYears((prevYears) => {
+          let def = -1;
+          if (prevYears.yearStart === activePeriod?.yearStart) {
+            clearInterval(intervalIdRef);
+            return {
+              yearStart: prevYears.yearStart,
+              yearEnd: prevYears.yearEnd,
+            };
+          }
+          if (prevYears.yearStart < activePeriod?.yearStart) {
+            def = 1;
+          }
+          return {
+            yearStart: prevYears.yearStart + def,
+            yearEnd: prevYears.yearEnd + def,
+          };
+        });
+      }, 50);
+      return () => {
+        if (intervalIdRef) {
+          clearInterval(intervalIdRef);
+        }
+      };
+    }
+  }, [activePeriod?.id]);
 
   useEffect(() => {
     setActivePeriod(activeTimePeriod);
@@ -34,65 +85,97 @@ const TimePeriodSelector: React.FC<TimePeriodSelectorProps> = ({
     onPeriodChange(period);
   };
 
+  const handlePeriodSet = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    const directValue = e.currentTarget.getAttribute("data-direct");
+    const direct = directValue === "prev" ? -1 : 1;
+
+    const currentActivePeriodIndex = timePeriods.findIndex(
+      (timePeriod) => timePeriod.id === activePeriod?.id
+    );
+
+    const newActivePeriod = timePeriods[currentActivePeriodIndex + direct];
+    setActivePeriod(newActivePeriod);
+    onPeriodChange(newActivePeriod);
+  };
+
+  const styleForTimePeriodBox = (index: number) => {
+    return {
+      top: "50%",
+      left: "50%",
+      transform: `translate(-50%, -50%) rotate(${
+        (index / timePeriods.length) * 360
+      }deg) translate(${radius}px) rotate(${
+        (360 / timePeriods.length) * (activePeriodIndex + 1) -
+        (index / timePeriods.length) * 360
+      }deg)`,
+    };
+  };
+  const styleForTimePeriodSelector = () => {
+    return {
+      transform: `rotate(-${
+        (360 / timePeriods.length) * (activePeriodIndex + 1)
+      }deg)`,
+    };
+  };
+
   return (
     <div className="time-period-wrapper">
       <h1 className="time-period-h1">Исторические даты</h1>
-      <div className="time-period-years">
-        <div className="time-period-yearStart">{activePeriod?.yearStart}</div>
-        <div className="time-period-yearEnd">{activePeriod?.yearEnd}</div>
-      </div>
+      {years?.yearStart !== 0 && (
+        <div className="time-period-years">
+          <div className="time-period-yearStart">{years.yearStart}</div>
+          <div className="time-period-yearEnd">{years.yearEnd}</div>
+        </div>
+      )}
       <div className="time-period-buttons">
         <div className="time-period-buttonsInfo">
           {activePeriod?.number.toString().padStart(2, "0")}/
           {timePeriods.length.toString().padStart(2, "0")}
         </div>
-        <div className="time-period-button prev">
+        <button
+          className="time-period-button prev"
+          disabled={activePeriod?.number === 1}
+          data-direct={"prev"}
+          onClick={handlePeriodSet}
+        >
           <img src={prevImage} alt="prev" />
-        </div>
-        <div className="time-period-button next">
+        </button>
+        <button
+          className="time-period-button next"
+          disabled={activePeriod?.number === timePeriods.length}
+          onClick={handlePeriodSet}
+          data-direct={"next"}
+        >
           <img src={nextImage} alt="next" />
-        </div>
+        </button>
       </div>
       <div
         className="time-period-selector"
-        style={{
-          transform: `rotate(-${
-            (360 / timePeriods.length) * (activePeriodIndex + 1)
-          }deg)`,
-        }}
+        style={styleForTimePeriodSelector()}
       >
         {timePeriods.map((period, index) => (
           <div
             key={period.id}
-            style={{
-              top: "50%",
-              left: "50%",
-              transform: `translate(-50%, -50%) rotate(${
-                (index / timePeriods.length) * 360
-              }deg) translate(${radius}px) rotate(${
-                (360 / timePeriods.length) * (activePeriodIndex + 1) -
-                (index / timePeriods.length) * 360
-              }deg)`,
-              // transform: `translate(-50%, -50%) rotate(${
-              //   (index / timePeriods.length) * 360
-              // }deg) translate(${radius}px) rotate(-${
-              //   (activePeriodIndex / timePeriods.length) * 360 -
-              //   (360 / timePeriods.length) * (activePeriodIndex + 1)
-              // }deg)`,
-            }}
-            className={`time-period ${
-              activePeriod?.id === period.id ? "active" : ""
-            }`}
-            onClick={() => handlePeriodChange(period)}
+            className="time-period-box"
+            style={styleForTimePeriodBox(index)}
           >
-            {period.number}
-            <h2
-              className={`time-period-name ${
+            <div
+              className={`time-period ${
                 activePeriod?.id === period.id ? "active" : ""
               }`}
+              onClick={() => handlePeriodChange(period)}
             >
-              {period.name}
-            </h2>
+              <div>{period.number}</div>
+              <h2
+                className={`time-period-name ${
+                  activePeriod?.id === period.id ? "active" : "not-active"
+                }`}
+              >
+                {period.name}
+              </h2>
+            </div>
           </div>
         ))}
       </div>

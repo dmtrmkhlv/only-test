@@ -12,37 +12,70 @@ export interface SwiperSliderProps {
 
 const SwiperSlider: React.FC<SwiperSliderProps> = ({ events }) => {
   const swiperRef = useRef<SwiperRef>(null);
+  const navigationPrevRef = useRef<HTMLDivElement>(null);
+  const navigationNextRef = useRef<HTMLDivElement>(null);
+  const swiperWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    gsap.from(swiperRef.current, { duration: 1.0, opacity: 0 });
-    gsap.to(swiperRef.current, { duration: 1.0, opacity: 1 });
+    const tl = gsap.timeline({ delay: 0.75 });
+    tl.from(swiperWrapperRef.current, { opacity: 0 });
+    tl.to(swiperWrapperRef.current, { duration: 1.0, opacity: 1 }); // Add a 1-second delay
   }, [events]);
+
+  const buttonsCustomShow = (
+    navigationPrevRef: React.RefObject<HTMLDivElement>,
+    navigationNextRef: React.RefObject<HTMLDivElement>,
+    swiperRef: React.RefObject<SwiperRef>
+  ) => {
+    if (swiperRef.current) {
+      const swiperContainer = swiperRef.current.swiper.el;
+
+      const navigationPrev = swiperContainer.querySelector(
+        ".swiper-button-prev"
+      );
+      const navigationNext = swiperContainer.querySelector(
+        ".swiper-button-next"
+      );
+
+      navigationPrev.classList.contains("swiper-button-disabled")
+        ? navigationPrevRef.current?.classList.add("swiper-button-disabled")
+        : navigationPrevRef.current?.classList.remove("swiper-button-disabled");
+      navigationNext.classList.contains("swiper-button-disabled")
+        ? navigationNextRef.current?.classList.add("swiper-button-disabled")
+        : navigationNextRef.current?.classList.remove("swiper-button-disabled");
+    }
+  };
 
   useEffect(() => {
     if (swiperRef.current) {
       const swiper = swiperRef.current.swiper;
-      const navigationPrev = document.querySelector(".swiper-button-prev");
-      const navigationNext = document.querySelector(".swiper-button-next");
 
-      navigationPrev?.addEventListener("click", () => swiper.slidePrev());
-      navigationNext?.addEventListener("click", () => swiper.slideNext());
+      buttonsCustomShow(navigationPrevRef, navigationNextRef, swiperRef);
+
+      navigationPrevRef.current?.addEventListener("click", () => {
+        swiper.slidePrev();
+        buttonsCustomShow(navigationPrevRef, navigationNextRef, swiperRef);
+      });
+      navigationNextRef.current?.addEventListener("click", () => {
+        swiper.slideNext();
+        buttonsCustomShow(navigationPrevRef, navigationNextRef, swiperRef);
+      });
     }
   }, [events]);
 
   return (
-    <>
-      <div className="swiper-navigation">
-        <div className="swiper-button-prev"></div>
-        <div className="swiper-button-next"></div>
-      </div>
+    <div ref={swiperWrapperRef} className="swiper-wrapper-custom">
       <Swiper
         ref={swiperRef}
         modules={[Navigation]}
         spaceBetween={50}
-        slidesPerView={3}
+        slidesPerView={3.5}
         navigation
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
+        onSlideChange={() => {
+          buttonsCustomShow(navigationPrevRef, navigationNextRef, swiperRef);
+        }}
       >
         {events.map((event, index) => (
           <SwiperSlide key={index}>
@@ -51,7 +84,11 @@ const SwiperSlider: React.FC<SwiperSliderProps> = ({ events }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
+      <div className="swiper-navigation">
+        <div ref={navigationPrevRef} className="swiper-button-prev"></div>
+        <div ref={navigationNextRef} className="swiper-button-next"></div>
+      </div>
+    </div>
   );
 };
 
