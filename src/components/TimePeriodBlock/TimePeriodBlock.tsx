@@ -234,7 +234,12 @@ const TimePeriodBlock: React.FC = () => {
         activeTimePeriod={activePeriod}
         onPeriodChange={handlePeriodChange}
       />
-      {activePeriod && <SwiperSlider events={activePeriod.events} />}
+      {activePeriod && (
+        <SwiperSlider
+          events={activePeriod.events}
+          activePeriodName={activePeriod.name}
+        />
+      )}
     </div>
   );
 };

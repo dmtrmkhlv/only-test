@@ -68,7 +68,7 @@ const TimePeriodSelector: React.FC<TimePeriodSelectorProps> = ({
         }
       };
     }
-  }, [activePeriod?.id]);
+  }, [activePeriod, activePeriod?.id, years.yearStart]);
 
   useEffect(() => {
     setActivePeriod(activeTimePeriod);

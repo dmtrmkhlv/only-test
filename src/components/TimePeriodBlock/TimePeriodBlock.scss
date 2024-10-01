@@ -6,4 +6,11 @@
     border-left: 1px solid var(--color-border);
     border-right: 1px solid var(--color-border);
     overflow: hidden;
+
+    @media (max-width: 960px) {
+        padding: 59px 20px 14px 20px;
+        margin: 0;
+        max-width: 100%;
+        position: relative;
+    }
 }

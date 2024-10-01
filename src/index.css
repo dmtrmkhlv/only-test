@@ -2,9 +2,11 @@
   --color-pink: #EF5DA8;
   --color-purple: #5D5FEF;
   --color-text: #42567A;
+  --color-text-opacity: #8b9099;
   --color-border: #42567a7a;
   --color-header: #3877EE;
   --color-bg: #F4F5F9;
+  --color-bg-opacity: #f4f5f963;
   --transition-duration: 1s;
 }
 

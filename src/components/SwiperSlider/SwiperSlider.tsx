@@ -8,9 +8,13 @@ import { TimePeriodEvent } from "../../types";
 
 export interface SwiperSliderProps {
   events: TimePeriodEvent[];
+  activePeriodName: string;
 }
 
-const SwiperSlider: React.FC<SwiperSliderProps> = ({ events }) => {
+const SwiperSlider: React.FC<SwiperSliderProps> = ({
+  events,
+  activePeriodName,
+}) => {
   const swiperRef = useRef<SwiperRef>(null);
   const navigationPrevRef = useRef<HTMLDivElement>(null);
   const navigationNextRef = useRef<HTMLDivElement>(null);
@@ -37,10 +41,10 @@ const SwiperSlider: React.FC<SwiperSliderProps> = ({ events }) => {
         ".swiper-button-next"
       );
 
-      navigationPrev.classList.contains("swiper-button-disabled")
+      navigationPrev?.classList.contains("swiper-button-disabled")
         ? navigationPrevRef.current?.classList.add("swiper-button-disabled")
         : navigationPrevRef.current?.classList.remove("swiper-button-disabled");
-      navigationNext.classList.contains("swiper-button-disabled")
+      navigationNext?.classList.contains("swiper-button-disabled")
         ? navigationNextRef.current?.classList.add("swiper-button-disabled")
         : navigationNextRef.current?.classList.remove("swiper-button-disabled");
     }
@@ -65,11 +69,20 @@ const SwiperSlider: React.FC<SwiperSliderProps> = ({ events }) => {
 
   return (
     <div ref={swiperWrapperRef} className="swiper-wrapper-custom">
+      <h2 className={`time-period-name mobile`}>{activePeriodName}</h2>
       <Swiper
         ref={swiperRef}
         modules={[Navigation]}
         spaceBetween={50}
-        slidesPerView={3.5}
+        // slidesPerView={3.5}
+        breakpoints={{
+          320: {
+            slidesPerView: 1.5,
+          },
+          1920: {
+            slidesPerView: 3.5,
+          },
+        }}
         navigation
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
