@@ -21,9 +21,17 @@ const SwiperSlider: React.FC<SwiperSliderProps> = ({
   const swiperWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({ delay: 0.75 });
-    tl.from(swiperWrapperRef.current, { opacity: 0 });
-    tl.to(swiperWrapperRef.current, { duration: 1.0, opacity: 1 }); // Add a 1-second delay
+    let mm = gsap.matchMedia();
+    mm.add("(max-width: 960px)", () => {
+      const tl = gsap.timeline({ delay: 0.75 });
+      tl.from(swiperWrapperRef.current, { opacity: 0, y: "5%" });
+      tl.to(swiperWrapperRef.current, { duration: 1.0, opacity: 1, y: 0 });
+    });
+    mm.add("(min-width: 961px)", () => {
+      const tl = gsap.timeline({ delay: 0.75 });
+      tl.from(swiperWrapperRef.current, { opacity: 0 });
+      tl.to(swiperWrapperRef.current, { duration: 1.0, opacity: 1 });
+    });
   }, [events]);
 
   const buttonsCustomShow = (

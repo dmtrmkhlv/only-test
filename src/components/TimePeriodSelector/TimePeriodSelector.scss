@@ -178,6 +178,10 @@
     @media (max-width: 960px) {
         width: 25px;
         height: 25px;
+
+        img {
+            transform: scale(.5);
+        }
     }
 }
 
@@ -325,6 +329,14 @@
     opacity: 0;
     font-weight: bold;
     font-size: 20px;
+
+    &.mobile {
+        display: block;
+        opacity: 1;
+        margin: 0;
+        position: absolute;
+        top: -40px;
+    }
 
     &.active {
         display: block;
