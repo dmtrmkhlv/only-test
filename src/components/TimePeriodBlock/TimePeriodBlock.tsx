@@ -52,28 +52,26 @@ const TimePeriodBlock: React.FC = () => {
         events: [
           {
             year: 1987,
-            content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+            content: "«Хищник»/Predator, США (реж. Джон Мактирнан)",
           },
           {
             year: 1988,
             content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+              "«Кто подставил кролика Роджера»/Who Framed Roger Rabbit, США (реж. Роберт Земекис)",
           },
           {
             year: 1989,
             content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+              "«Назад в будущее 2»/Back To The Future 2, США (реж. Роберт Земекис)",
           },
           {
             year: 1990,
-            content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+            content: "«Крепкий орешек 2»/Die Hard 2, США (реж. Ренни Харлин)",
           },
           {
             year: 1991,
             content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+              "«Семейка Аддамс»/The Addams Family, США, (реж. Барри Зонненфельд)",
           },
         ],
       },
@@ -87,28 +85,25 @@ const TimePeriodBlock: React.FC = () => {
           {
             year: 1992,
             content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+              "Нобелевская премия по литературе — Дерек Уолкотт, «За блестящий образец карибского эпоса в 64 разделах».",
           },
           {
             year: 1994,
-            content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+            content: "«Бессонница» — роман Стивена Кинга.",
           },
           {
             year: 1995,
-            content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+            content: "Нобелевская премия по литературе — Шеймас Хини",
           },
           {
             year: 1997,
-            content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+            content: "«Гарри Поттер и Философский камень» Дж. К. Роулинг",
           },
         ],
       },
       {
         id: uuidv4(),
-        name: "",
+        name: "Театр",
         number: 4,
         yearStart: 1999,
         yearEnd: 2004,
@@ -116,17 +111,16 @@ const TimePeriodBlock: React.FC = () => {
           {
             year: 1999,
             content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+              "премьера балета «Золушка» в постановке Жан-Кристофа Майо, сценография Эрнеста Пиньона",
           },
           {
             year: 2000,
-            content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+            content: "возобновлено издание журнала «Театр».",
           },
           {
             year: 2002,
             content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+              "премьера трилогии Тома Стоппарда «Берег Утопии», Королевский Национальный театр, Лондон",
           },
           {
             year: 2003,
@@ -184,32 +178,32 @@ const TimePeriodBlock: React.FC = () => {
           {
             year: 2015,
             content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+              "13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды",
           },
           {
             year: 2016,
             content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+              "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
           },
           {
             year: 2017,
             content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+              "Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi",
           },
           {
             year: 2018,
             content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+              "Старт космического аппарата Solar Probe Plus, предназначенного для изучения Солнца",
           },
           {
             year: 2019,
             content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+              "#Google объявил о создании 53-кубитного квантового компьютера.",
           },
           {
             year: 2020,
             content:
-              "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quisquam ut cupiditate incidunt veniam dolores iure nostrum minima quam eaque qui porro accusamus totam perspiciatis, amet molestias excepturi aut vero.",
+              "Корабль Crew Dragon вернулс на Землю из первого пилотируемого полёта",
           },
         ],
       },

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import "swiper/css/bundle";
@@ -20,18 +20,34 @@ const SwiperSlider: React.FC<SwiperSliderProps> = ({
   const navigationNextRef = useRef<HTMLDivElement>(null);
   const swiperWrapperRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (swiperRef.current) {
+      swiperRef.current.swiper.slideTo(0, 0);
+    }
+
     let mm = gsap.matchMedia();
+    let timeline: gsap.core.Timeline;
+
     mm.add("(max-width: 960px)", () => {
-      const tl = gsap.timeline({ delay: 0.75 });
-      tl.from(swiperWrapperRef.current, { opacity: 0, y: "5%" });
-      tl.to(swiperWrapperRef.current, { duration: 1.0, opacity: 1, y: 0 });
+      timeline = gsap.timeline({ delay: 0.75 });
+      timeline.from(swiperWrapperRef.current, { opacity: 0, y: "5%" });
+      timeline.to(swiperWrapperRef.current, {
+        duration: 1.0,
+        opacity: 1,
+        y: 0,
+      });
     });
     mm.add("(min-width: 961px)", () => {
-      const tl = gsap.timeline({ delay: 0.75 });
-      tl.from(swiperWrapperRef.current, { opacity: 0 });
-      tl.to(swiperWrapperRef.current, { duration: 1.0, opacity: 1 });
+      timeline = gsap.timeline({ delay: 0.75 });
+      timeline.from(swiperWrapperRef.current, { opacity: 0 });
+      timeline.to(swiperWrapperRef.current, { duration: 1.0, opacity: 1 });
     });
+
+    return () => {
+      if (timeline) {
+        timeline.kill();
+      }
+    };
   }, [events]);
 
   const buttonsCustomShow = (
@@ -82,7 +98,6 @@ const SwiperSlider: React.FC<SwiperSliderProps> = ({
         ref={swiperRef}
         modules={[Navigation]}
         spaceBetween={50}
-        // slidesPerView={3.5}
         breakpoints={{
           320: {
             slidesPerView: 1.5,

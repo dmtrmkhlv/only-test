@@ -15,14 +15,17 @@
 @keyframes opacityFadeOut {
     0% {
         opacity: 1;
+        overflow: visible;
     }
 
     50% {
         opacity: 1;
+        overflow: visible;
     }
 
     100% {
         opacity: 0;
+        overflow: hidden;
     }
 }
 
@@ -119,11 +122,31 @@
     font-weight: bold;
     line-height: 160%;
     letter-spacing: -0.02em;
+    user-select: none;
+
+    @media (max-width: 1500px) {
+        font-size: 140px;
+    }
+
+    @media (max-width: 1300px) {
+        font-size: 120px;
+    }
+
+    @media (max-width: 1200px) {
+        font-size: 110px;
+    }
+
+    @media (max-width: 1100px) {
+        font-size: 100px;
+    }
+
+    @media (max-width: 1000px) {
+        font-size: 90px;
+    }
 
     @media (max-width: 960px) {
         font-size: 56px;
     }
-
 }
 
 .time-period-yearStart {
@@ -213,7 +236,6 @@
 
     @media (max-width: 960px) {
         display: flex;
-        // transform: none !important;
         width: fit-content;
         height: fit-content;
         gap: 10px;
@@ -234,12 +256,19 @@
     justify-content: center;
     cursor: pointer;
 
-
     &:hover {
         .time-period {
             width: 56px;
             height: 56px;
             background-color: var(--color-bg);
+
+            &.time-period.not-active {
+
+                .time-period-number {
+                    display: block;
+                }
+
+            }
 
             @media (max-width: 960px) {
                 width: 6px;
@@ -266,7 +295,6 @@
     align-items: center;
     border-radius: 50%;
     transition: transform 0.3s ease-in-out;
-    overflow: hidden;
     border: 1px solid var(--color-text);
     cursor: pointer;
     user-select: none;
@@ -290,15 +318,20 @@
         overflow: visible;
     }
 
+    &.not-active {
+        .time-period-number {
+            display: none;
+        }
+    }
+
+
     @media (max-width: 960px) {
         width: 6px;
         height: 6px;
         background-color: var(--color-text-opacity);
         border-color: var(--color-text-opacity);
-        // color: var(--color-text-opacity);
-        // font-size: 1px;
 
-        div {
+        .time-period-number {
             display: none;
         }
 
@@ -308,8 +341,6 @@
             height: 6px;
             background-color: var(--color-text);
             border-color: var(--color-text-text);
-            // color: transparent;
-
 
             &::after {
                 background-color: inherit;
@@ -326,7 +357,6 @@
 
 .time-period-name {
     display: none;
-    opacity: 0;
     font-weight: bold;
     font-size: 20px;
 
@@ -336,6 +366,10 @@
         margin: 0;
         position: absolute;
         top: -40px;
+
+        @media (min-width: 961px) {
+            display: none;
+        }
     }
 
     &.active {
@@ -352,13 +386,11 @@
     }
 
     &.not-active {
-        display: none;
         animation: opacityFadeOut 1.5s;
         animation-fill-mode: forwards;
     }
 
 }
-
 
 .time-name {
     display: none;

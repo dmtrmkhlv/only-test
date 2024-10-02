@@ -101,6 +101,21 @@ const TimePeriodSelector: React.FC<TimePeriodSelectorProps> = ({
   };
 
   const styleForTimePeriodBox = (index: number) => {
+    let def = 0;
+    switch (timePeriods.length) {
+      case 5:
+        def = 12;
+        break;
+      case 4:
+        def = 30;
+        break;
+      case 3:
+        def = 60;
+        break;
+      case 2:
+        def = 120;
+        break;
+    }
     return {
       top: "50%",
       left: "50%",
@@ -108,14 +123,30 @@ const TimePeriodSelector: React.FC<TimePeriodSelectorProps> = ({
         (index / timePeriods.length) * 360
       }deg) translate(${radius}px) rotate(${
         (360 / timePeriods.length) * (activePeriodIndex + 1) -
-        (index / timePeriods.length) * 360
+        (index / timePeriods.length) * 360 -
+        def
       }deg)`,
     };
   };
   const styleForTimePeriodSelector = () => {
+    let def = 0;
+    switch (timePeriods.length) {
+      case 5:
+        def = 12;
+        break;
+      case 4:
+        def = 30;
+        break;
+      case 3:
+        def = 60;
+        break;
+      case 2:
+        def = 120;
+        break;
+    }
     return {
       transform: `rotate(-${
-        (360 / timePeriods.length) * (activePeriodIndex + 1)
+        (360 / timePeriods.length) * (activePeriodIndex + 1) - def
       }deg)`,
     };
   };
@@ -163,11 +194,11 @@ const TimePeriodSelector: React.FC<TimePeriodSelectorProps> = ({
           >
             <div
               className={`time-period ${
-                activePeriod?.id === period.id ? "active" : ""
+                activePeriod?.id === period.id ? "active" : "not-active"
               }`}
               onClick={() => handlePeriodChange(period)}
             >
-              <div>{period.number}</div>
+              <div className={"time-period-number"}>{period.number}</div>
               <h2
                 className={`time-period-name ${
                   activePeriod?.id === period.id ? "active" : "not-active"
