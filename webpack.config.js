@@ -1,4 +1,11 @@
+import { resolve } from "path";
+
 module.exports = {
+  entry: "./src/index.tsx",
+  output: {
+    path: resolve(__dirname, "build"),
+    filename: "bundle.js",
+  },
   module: {
     rules: [
       {
@@ -22,5 +29,8 @@ module.exports = {
         ],
       },
     ],
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
 };

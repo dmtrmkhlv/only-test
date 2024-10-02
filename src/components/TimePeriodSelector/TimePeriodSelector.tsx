@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TimePeriod } from "../../types";
-import "./TimePeriodSelector.scss";
+import "./../../styles/TimePeriodSelector.scss";
 import prevImage from "./../../assets/images/prev.svg";
 import nextImage from "./../../assets/images/next.svg";
 

@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { TimePeriod } from "../../types";
 import SwiperSlider from "../SwiperSlider/SwiperSlider";
 import TimePeriodSelector from "../TimePeriodSelector/TimePeriodSelector";
-import "./TimePeriodBlock.scss";
+import "./../../styles/TimePeriodBlock.scss";
 
 const TimePeriodBlock: React.FC = () => {
   const [activePeriod, setActivePeriod] = useState<TimePeriod | null>(null);

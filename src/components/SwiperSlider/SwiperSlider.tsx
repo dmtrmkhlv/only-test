@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import "swiper/css/bundle";
-import "./SwiperSlider.scss";
+import "./../../styles/SwiperSlider.scss";
 import { gsap } from "gsap";
 import { TimePeriodEvent } from "../../types";
 
